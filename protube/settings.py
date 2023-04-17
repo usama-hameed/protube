@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+from datetime import timedelta
+from typing import List, Tuple
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    # 'django_minio_backend',
+    # 'django_minio_backend.apps.DjangoMinioBackendConfig',
     'main'
 ]
 
@@ -136,9 +139,49 @@ USE_L10N = True
 USE_TZ = True
 
 
+# MINIO_ENDPOINT = '0.0.0.0'
+# MINIO_EXTERNAL_ENDPOINT = "minio:9000"  # Default is same as MINIO_ENDPOINT
+# MINIO_EXTERNAL_ENDPOINT_USE_HTTPS = False  # Default is same as MINIO_USE_HTTPS
+# MINIO_ACCESS_KEY = 'yourMinioAccessKey'
+# MINIO_SECRET_KEY = 'yourVeryS3cr3tP4ssw0rd'
+# MINIO_USE_HTTPS = True
+# MINIO_URL_EXPIRY_HOURS = timedelta(days=1)  # Default is 7 days (longest) if not defined
+# MINIO_CONSISTENCY_CHECK_ON_START = True
+# MINIO_PRIVATE_BUCKETS = [
+#     'video',
+#     'my-static-files-bucket'
+# ]
+# MINIO_PUBLIC_BUCKETS = [
+#     'django-backend-dev-public',
+# ]
+# MINIO_POLICY_HOOKS: List[Tuple[str, dict]] = []
+# # MINIO_MEDIA_FILES_BUCKET = 'my-media-files-bucket'  # replacement for MEDIA_ROOT
+# # MINIO_STATIC_FILES_BUCKET = 'my-static-files-bucket'  # replacement for STATIC_ROOT
+# MINIO_BUCKET_CHECK_ON_SAVE = True  # Default: True // Creates bucket if missing, then save
+#
+# # Custom HTTP Client (OPTIONAL)
+# import os
+# import certifi
+# import urllib3
+# timeout = timedelta(minutes=5).seconds
+# ca_certs = os.environ.get('SSL_CERT_FILE') or certifi.where()
+# MINIO_HTTP_CLIENT: urllib3.poolmanager.PoolManager = urllib3.PoolManager(
+#     timeout=urllib3.util.Timeout(connect=timeout, read=timeout),
+#     maxsize=10,
+#     cert_reqs='CERT_REQUIRED',
+#     ca_certs=ca_certs,
+#     retries=urllib3.Retry(
+#         total=5,
+#         backoff_factor=0.2,
+#         status_forcelist=[500, 502, 503, 504]
+#     )
+# )
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+# STATICFILES_STORAGE = 'django_minio_backend.models.MinioBackendStatic'
 
+# MINIO_STATIC_FILES_BUCKET = 'my-static-files-bucket'
 STATIC_URL = '/static/'
 
 # Default primary key field type

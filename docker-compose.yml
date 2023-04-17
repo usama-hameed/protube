@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - minio
+  minio:
+    image: minio/minio
+    environment:
+      - MINIO_ACCESS_KEY=yourMinioAccessKey
+      - MINIO_SECRET_KEY=yourVeryS3cr3tP4ssw0rd
+    ports:
+    - "9000:9000"

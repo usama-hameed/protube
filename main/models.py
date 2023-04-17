@@ -13,6 +13,7 @@ class Playlist(models.Model):
 
 class Videos(models.Model):
     title = models.CharField(max_length=225, default='', null=False, unique=True)
+    # video = models.FileField(verbose_name='video', storage=MinioBackend(bucket_name='video'), upload_to=iso_date_prefix)
     uploaded_date = models.DateField(default=date.today)
     views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
